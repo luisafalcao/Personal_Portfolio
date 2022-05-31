@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-/* RESET */
+/* 1. Reset */
 html {
     box-sizing: border-box;
 }
@@ -14,7 +14,7 @@ html {
     padding: 0;
 }
 
-/* STYLING */
+/* 2. General Styling */
 :root {
     /* colors */
     --light: #fffaf1;
@@ -46,24 +46,11 @@ h1 {
     text-align: center;
 }
 
-@media only screen and (max-width:770px) {
-    h1 {
-        font-size: 6rem;
-    }
-}
-
 h2 {
     font-size: 5rem;
     text-transform: lowercase;
     font-style: italic;
     text-align: right;
-}
-
-@media only screen and (max-width:770px) {
-    h2 {
-        font-size: 4rem;
-        text-align: left;
-    }
 }
 
 h3 {
@@ -72,12 +59,6 @@ h3 {
     text-transform: lowercase;
     font-style: italic;
     font-weight: 400;
-}
-
-@media only screen and (max-width:770px) {
-    h3 {
-        font-size: 2rem;
-    }
 }
 
 h4 {
@@ -99,39 +80,26 @@ li {
     list-style: none;
 }
 
-nav {
-    width: 100%;
-    text-transform: uppercase;
-    text-align: center;
+.fixed {
     position: fixed;
-    bottom: 0;
-    padding: 20px;
-    z-index: 10;
-    background-color: var(--light)
 }
 
-nav ul li {
-    display: inline-block;
-    font-weight: 700;
-    margin: 0 10px;
+@media only screen and (max-width:770px) {
+    h1 {
+        font-size: 6rem;
+    }
+
+    h2 {
+        font-size: 4rem;
+        text-align: left;
+    }
+
+    h3 {
+        font-size: 2rem;
+    }
 }
 
-nav ul li a {
-    padding: 5px 10px;
-}
-
-nav ul li a:hover {
-    color: var(--accent);
-    background-color: var(--dark);
-}
-
-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
+/* Sections */
 section {
     height: 100vh;
     padding: 0 4rem;
@@ -165,17 +133,22 @@ section#projects {
     align-items: center;
 }
 
-@media only screen and (max-width:770px) {
-    section {
-        grid-template-columns: 1fr;
-    }
-}
-
 .column {
     padding: 2rem;
 }
 
+.stacking-slide {
+    height: 100vh;
+    width: 100%;
+    position: sticky;
+    top: 0;
+}
+
 @media only screen and (max-width:770px) {
+    section {
+        grid-template-columns: 1fr;
+    }
+
     .column.left {
         align-self: end
     }
@@ -189,6 +162,45 @@ section#projects {
     }
 }
 
+/* 3. Navbar */
+nav {
+    width: 100%;
+    text-transform: uppercase;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    padding: 20px;
+    z-index: 10;
+    background-color: var(--light)
+}
+
+nav ul li {
+    display: inline-block;
+    font-weight: 700;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    padding: 5px 10px;
+}
+
+nav ul li a:hover {
+    color: var(--accent);
+    background-color: var(--dark);
+}
+
+/* 4. Header */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* 5. About */
+
+/* 6. Projects */
 .project-background {
     width: 100%;
     transition: all 1s;
@@ -214,38 +226,16 @@ section#projects {
     transform: translateX(-1000px);
 }
 
-.stacking-slide {
-    height: 100vh;
-    width: 100%;
-    position: sticky;
-    top: 0;
-}
-
+/* 7. Skills */
 .list-heading {
     font-weight: 700;
     margin-top: 20px;
 }
 
-.project-type {
-    display: none;
-    margin-left: 10px;
-    font-style: italic;
-}
+/* 8. Contact */
 
-@media only screen and (max-width:770px) {
-    .project-type {
-        display: inline;
-    }
-}
 
-.project-name {
-    padding: 5px 10px;
-}
 
-ul li:hover .project-name {
-    border: 2px solid var(--accent);
-}
-
-ul li:hover .project-type {
-    display: inline;
+.bg {
+    background-color: red;
 }
