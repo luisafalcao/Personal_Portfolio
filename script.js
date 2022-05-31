@@ -1,14 +1,14 @@
 // expander
-const projects = document.querySelector('.projects')
-const projectContainer = document.querySelector('#projects')
+const projectPanel = document.querySelector('.project-panel')
+const projectBackground = document.querySelector('.project-background')
 const sectionTitle = document.querySelector('.section-title')
 
 const expand = () => {
-    projectContainer.style.gridTemplateColumns = '10% 90%';
-    sectionTitle.classList.add('rotate')
+   projectBackground.classList.toggle('shrink')
+   sectionTitle.classList.toggle('shrink')
 }
 
-projects.addEventListener('click', expand)
+projectPanel.addEventListener('click', expand)
 
 
 // observer
