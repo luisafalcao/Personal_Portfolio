@@ -3,7 +3,8 @@ const projects = document.querySelector('#projects')
 const projectPanel = document.querySelector('.project-panel')
 const projectBackground = document.querySelector('.project-background')
 const sectionTitle = document.querySelector('.section-title')
-const projectLinks = document.querySelectorAll('.project-link')
+const projectNav = document.querySelector('.project-nav')
+const projectLinks = document.querySelectorAll('.project-nav li')
 const asides = document.querySelectorAll('aside')
 const closeBtn = document.querySelector('.close-btn')
 
@@ -12,7 +13,7 @@ for (let i = 0; i < projectLinks.length; i++) {
         projectBackground.classList.add('shrink')
         projectPanel.classList.add('expand')
         sectionTitle.classList.add('shrink')
-        
+
         for (let j = 0; j < asides.length; j++) {
             if (j === i) {
                 asides[j].classList.add('visible')

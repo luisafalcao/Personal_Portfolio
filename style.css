@@ -18,11 +18,15 @@ html {
 :root {
     /* colors */
     --light: #fffaf1;
+    --medium: #f8f1e9;
     --dark: #000000;
     --accent: #c0e205;
 
     /* fonts */
     --primary-ff: 'Montserrat', sans-serif;
+
+    /* height minus nav's height*/
+    --height: calc(100vh - 60px)
 }
 
 body {
@@ -36,7 +40,7 @@ form input {
 
 a {
     text-decoration: none;
-    color: #000000;
+    color: var(--dark);
     cursor: pointer;
 }
 
@@ -67,9 +71,11 @@ h4 {
     font-weight: 700;
 }
 
-h4 > span {
+h5 {
+    font-size: 1rem;
     font-weight: 400;
     font-style: italic;
+    margin-bottom: 1rem;
 }
 
 p {
@@ -78,10 +84,6 @@ p {
 
 li {
     list-style: none;
-}
-
-.fixed {
-    position: fixed;
 }
 
 @media only screen and (min-width:770px) {
@@ -101,8 +103,8 @@ li {
 
 /* Sections */
 section {
-    height: 100vh;
-    padding: 0 4rem;
+    min-height: var(--height);
+    padding: 0 2rem;
 }
 
 section:nth-child(odd) {
@@ -116,21 +118,27 @@ section:nth-child(even) {
 }
 
 section ul li {
-    margin: 10px;
+    line-height: 2rem;
 }
 
 section#about,
 section#skills,
 section#contact {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 100%;
     align-items: center;
 }
 
 section#projects {
-    padding: 0;
+    padding: 0 2rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+section#contact {
+    min-height: 100vh;
 }
 
 .column {
@@ -138,22 +146,32 @@ section#projects {
 }
 
 .stacking-slide {
-    height: 100vh;
+    height: var(--height);
     width: 100%;
     position: sticky;
     top: 0;
 }
 
-@media only screen and (max-width:770px) {
+@media only screen and (min-width: 770px) {
     section {
-        grid-template-columns: 100% !important;
+        padding: 0 4rem;
+    }
+
+    section#about,
+    section#skills,
+    section#contact {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        align-items: center;
     }
 
     section#projects {
-        padding: 4rem;
-        flex-direction: column;
+        padding: 0;
+        flex-direction: row;
     }
+}
 
+@media only screen and (max-width:770px) {
     .column.left {
         align-self: end
     }
@@ -187,6 +205,8 @@ nav ul li {
 
 nav ul li a {
     padding: 5px 10px;
+    transition: background-color ease-in 250ms,
+                color ease-in 200ms
 }
 
 nav ul li a:hover {
@@ -208,8 +228,7 @@ header {
 /* 6. Projects */
 .project-panel,
 .project-background {
-    width: 50%;
-    height: 100vh;
+    width: 100%;
 
     transition: all 1s;
 }
@@ -224,7 +243,7 @@ header {
     transition: transform ease 0.5s;
 }
 
-article {
+.project-nav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -232,27 +251,53 @@ article {
     flex-shrink: 0;
 }
 
-article ul li {
+.project-nav ul li {
     line-height: 2rem;
     cursor: pointer;
 }
 
 .project-name {
-    padding: 5px 10px;
-    border: 3px solid transparent;
+    font-weight: 700;
 }
 
 .project-type {
     font-style: italic;
     padding: 5px 10px;
-    margin: auto 5px
+    margin: auto 5px;
+}
+
+.project-img {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+aside {
+    display: none;
+    opacity: 0;
+    transition: opacity 1s 1s;
+}
+
+aside.visible {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    opacity: 1;
+    margin-top: 3rem;
 }
 
 @media only screen and (min-width:770px) {
     .project-panel {
-        background-color: #f8f1e9;
+        background-color: var(--medium);
         display: flex;
         gap: 50px;
+        padding: 4rem 2rem;
+    }
+
+    .project-panel,
+    .project-background {
+        width: 50%;
+        height: var(--height);
     }
 
     .project-panel.expand {
@@ -261,6 +306,7 @@ article ul li {
 
     .project-background.shrink {
         width: 0%;
+        padding: 0;
     }
 
     .section-title.shrink {
@@ -268,9 +314,17 @@ article ul li {
     }
 
     .project-type {
-        display: none; 
+        opacity: 0;
+        transition: opacity ease-in 100ms;
     }
-    .project-panel.expand .project-name:hover + .project-type {
+    
+    .project-name {
+        padding: 5px 10px;
+        font-weight: 400;
+        border: 3px solid transparent;
+    }
+
+    .project-panel.expand .project-type {
         display: none;
     }
     
@@ -279,42 +333,21 @@ article ul li {
     }
     
     .project-name:hover + .project-type {
-        display: inline;
+        opacity: 1;
     }
 
-    article {
+    aside.visible {
+        margin-top: 0;
+    }
+
+    .project-nav {
         height: 100%;
     }
-}
 
-aside {
-    display: none;
-}
-
-aside.visible {
-    display: block;
-}
-
-@media only screen and (max-width:770px) {
-    .project-panel,
-    .project-background {
+    .project-img {
+        flex-direction: row;
         width: 100%;
-    }
-
-    .project-panel {
-        justify-content: flex-start;
-    }
-
-    .project-background {
-        justify-content: flex-end;
-    }
-
-    article {
-        justify-content: flex-start;
-    }
-
-    .project-name {
-        border-right: 1px solid var(--accent);
+        overflow-x: scroll;
     }
 }
 
@@ -324,5 +357,54 @@ aside.visible {
     margin-top: 20px;
 }
 
-/* 8. Contact */
+#skills .right {
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+}
 
+#skills ul {
+    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1.0), transparent);
+    /* height: 30%; */
+    width: 100%;
+    overflow-y: scroll;
+}
+
+@media only screen and (min-width:770px) {
+    #skills .right {
+        align-items: center;
+    }
+}
+/* 8. Contact */
+input,
+textarea {
+    border: 1px solid var(--dark);
+    margin: 10px auto;
+    width: 100%;
+    background-color: var(--medium);
+    padding: 5px;
+    transition: background-color ease 500ms;
+    font-family: var(--primary-ff);
+}
+
+input {
+    line-height: 1.5rem;
+}
+
+input#send-btn {
+    margin-left: 0;
+    width: 50%;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+input#send-btn:hover {
+    background-color: var(--accent);
+}
+
+label {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
