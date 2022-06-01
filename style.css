@@ -41,20 +41,20 @@ a {
 }
 
 h1 {
-    font-size: 7rem;
+    font-size: 6rem;
     text-transform: uppercase;
     text-align: center;
 }
 
 h2 {
-    font-size: 5rem;
+    font-size: 4rem;
+    text-align: left;
     text-transform: lowercase;
     font-style: italic;
-    text-align: right;
 }
 
 h3 {
-    font-size: 3rem;
+    font-size: 2rem;
     display: block;
     text-transform: lowercase;
     font-style: italic;
@@ -84,18 +84,18 @@ li {
     position: fixed;
 }
 
-@media only screen and (max-width:770px) {
+@media only screen and (min-width:770px) {
     h1 {
-        font-size: 6rem;
+        font-size: 7rem;
     }
-
+    
     h2 {
-        font-size: 4rem;
-        text-align: left;
+        font-size: 5rem;
+        text-align: right;
     }
-
+    
     h3 {
-        font-size: 2rem;
+        font-size: 3rem;
     }
 }
 
@@ -214,41 +214,22 @@ header {
     transition: all 1s;
 }
 
-.project-panel.expand {
-    width: 100%;
-}
-
 .project-background {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.project-background.shrink {
-    width: 0%;
-}
-
-.project-panel {
-    background-color: #f8f1e9;
-    display: grid;
-    grid-template-columns: 30% 70%;
-}
-
 .section-title {
     transition: transform ease 0.5s;
 }
 
-.section-title.shrink {
-    transform: translateX(-500px);
-}
-
 article {
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-
+    flex-shrink: 0;
 }
 
 article ul li {
@@ -258,21 +239,52 @@ article ul li {
 
 .project-name {
     padding: 5px 10px;
+    border: 3px solid transparent;
 }
 
 .project-type {
-    display: none;
     font-style: italic;
     padding: 5px 10px;
     margin: auto 5px
 }
 
-.project-name:hover {
-    border: 3px solid var(--accent);
-}
+@media only screen and (min-width:770px) {
+    .project-panel {
+        background-color: #f8f1e9;
+        display: flex;
+        gap: 50px;
+    }
 
-.project-name:hover + .project-type {
-    display: inline;
+    .project-panel.expand {
+        width: 100%;
+    }
+
+    .project-background.shrink {
+        width: 0%;
+    }
+
+    .section-title.shrink {
+        transform: translateX(-500px);
+    }
+
+    .project-type {
+        display: none; 
+    }
+    .project-panel.expand .project-name:hover + .project-type {
+        display: none;
+    }
+    
+    .project-name:hover {
+        border: 3px solid var(--accent);
+    }
+    
+    .project-name:hover + .project-type {
+        display: inline;
+    }
+
+    article {
+        height: 100%;
+    }
 }
 
 aside {
@@ -281,15 +293,29 @@ aside {
 
 aside.visible {
     display: block;
-    /* background-color: red; */
 }
 
 @media only screen and (max-width:770px) {
     .project-panel,
     .project-background {
         width: 100%;
-        height: 50vh;
-}
+    }
+
+    .project-panel {
+        justify-content: flex-start;
+    }
+
+    .project-background {
+        justify-content: flex-end;
+    }
+
+    article {
+        justify-content: flex-start;
+    }
+
+    .project-name {
+        border-right: 1px solid var(--accent);
+    }
 }
 
 /* 7. Skills */

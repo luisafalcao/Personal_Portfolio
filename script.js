@@ -1,11 +1,11 @@
-// expander
+// expander //
+const projects = document.querySelector('#projects')
 const projectPanel = document.querySelector('.project-panel')
 const projectBackground = document.querySelector('.project-background')
 const sectionTitle = document.querySelector('.section-title')
 const projectLinks = document.querySelectorAll('.project-link')
 const asides = document.querySelectorAll('aside')
 const closeBtn = document.querySelector('.close-btn')
-
 
 for (let i = 0; i < projectLinks.length; i++) {
     projectLinks[i].addEventListener('click', function(){
@@ -22,6 +22,43 @@ for (let i = 0; i < projectLinks.length; i++) {
         }
     })
 }
+
+// observers //
+if ('IntersectionObserver' in window) {
+    // shrink expanded project panel on scroll //
+    // options
+    const projectPanelShrinkOptions = {
+        rootMargin: '-100px',
+    };
+    
+    // observer
+    const projectPanelShrink = new IntersectionObserver(function(
+        entries, 
+        projectPanelShrink
+    ){
+        entries.forEach(entry => {
+            if(!entry.isIntersecting) {
+                projectBackground.classList.remove('shrink')
+                projectPanel.classList.remove('expand')
+                sectionTitle.classList.remove('shrink')
+                
+                for (let j = 0; j < asides.length; j++) {
+                    asides[j].classList.remove('visible')
+                }
+            } else {
+                // nav.classList.remove('appear');
+            }
+        })
+    }, projectPanelShrinkOptions);
+    
+    // observed object
+    projectPanelShrink.observe(projects);
+} else {
+    // not supported
+}
+
+
+
 
 
 // scroll
