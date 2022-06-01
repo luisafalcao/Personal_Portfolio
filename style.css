@@ -3,6 +3,7 @@
 /* 1. Reset */
 html {
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 *,
 *:before,
@@ -407,4 +408,8 @@ input#send-btn:hover {
 label {
     text-transform: uppercase;
     font-size: 0.8rem;
+}
+
+.active {
+    color: var(--accent);
 }
