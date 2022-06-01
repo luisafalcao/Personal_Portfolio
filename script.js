@@ -2,52 +2,59 @@
 const projectPanel = document.querySelector('.project-panel')
 const projectBackground = document.querySelector('.project-background')
 const sectionTitle = document.querySelector('.section-title')
+const projectLinks = document.querySelectorAll('.project-link')
+const asides = document.querySelectorAll('aside')
+const closeBtn = document.querySelector('.close-btn')
 
-const expand = () => {
-   projectBackground.classList.toggle('shrink')
-   sectionTitle.classList.toggle('shrink')
+
+for (let i = 0; i < projectLinks.length; i++) {
+    projectLinks[i].addEventListener('click', function(){
+        projectBackground.classList.add('shrink')
+        projectPanel.classList.add('expand')
+        sectionTitle.classList.add('shrink')
+        
+        for (let j = 0; j < asides.length; j++) {
+            if (j === i) {
+                asides[j].classList.add('visible')
+            } else {
+                asides[j].classList.remove('visible')
+            }
+        }
+    })
 }
 
-projectPanel.addEventListener('click', expand)
 
 // scroll
-let scrollPosition = window.scrollY
+// const sections = document.querySelectorAll('section')
 
-const sectionOne = document.querySelector("#about")
-const sectionTwo = document.querySelector("#projects")
-const sectionThree = document.querySelector("#skills")
-const sectionFour = document.querySelector("#contact")
+// const sectionOneHeight = sections[0].offsetHeight
+// const sectionTwoHeight = sections[1].offsetHeight
+// const sectionThreeHeight = sections[2].offsetHeight
+// const sectionFourHeight = sections[3].offsetHeight
 
-const sectionOneHeight = sectionOne.offsetHeight
-const sectionTwoHeight = sectionTwo.offsetHeight
-const sectionThreeHeight = sectionThree.offsetHeight
-const sectionFourHeight = sectionFour.offsetHeight
+// const nav = document.querySelector("nav")
 
-const nav = document.querySelector("nav")
+// const addClassOnScroll = () => {
+//     for (let i = 0; i < sections.length; i++) {
+//         sections[i].classList.add('stacking-slide');
+//     }
+// }
 
-const addClassOnScroll = () => {
-    sectionOne.classList.add("stacking-slide")
-    sectionTwo.classList.add("stacking-slide")
-    sectionThree.classList.add("stacking-slide")
-    sectionFour.classList.add("stacking-slide")
-}
+// const removeClassOnScroll = () => {
+//     for (let i = 0; i < sections.length; i++) {
+//         sections[i].classList.remove('stacking-slide');
+//     }
+// }
 
-const removeClassOnScroll = () => {
-    sectionOne.classList.remove("stacking-slide")
-    sectionTwo.classList.remove("stacking-slide")
-    sectionThree.classList.remove("stacking-slide")
-    sectionFour.classList.remove("stacking-slide")
-}
+// window.addEventListener('scroll', function() { 
+//     let scrollPosition = window.scrollY;
 
-window.addEventListener('scroll', function() { 
-    scrollPosition = window.scrollY;
+//     for (let i = 0; i < sections.length; i++) {
+//         if (scrollPosition >= sections[i].offsetHeight) {
+//             addClassOnScroll() 
+//         } else {
+//             removeClassOnScroll() 
+//         }
+//     }
+// });
 
-    if (scrollPosition >= sectionOneHeight) { 
-        addClassOnScroll() 
-    }
-    else { 
-        removeClassOnScroll() 
-    }
-    // console.log(scrollPosition)
-    // console.log(sectionOneHeight)
-});
