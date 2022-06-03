@@ -1,38 +1,109 @@
 // variables
 const projects = document.querySelector('#projects')
+const container = document.querySelector('#container')
 const projectPanel = document.querySelector('.project-panel')
 const projectBackground = document.querySelector('.project-background')
 const sectionTitle = document.querySelector('.section-title')
 const projectNav = document.querySelector('.project-nav')
-const projectLinks = document.querySelectorAll('.project-nav li')
-const projectNavCompact = document.querySelectorAll('.project-nav-compact')
+const projectLinks = document.querySelectorAll('.project-nav ul .project-name')
+const projectTypes = document.querySelectorAll('.project-type')
+const seeMore = document.querySelector('.more')
+const allProjects = document.querySelector('#all-projects')
 const asides = document.querySelectorAll('aside')
 const closeBtn = document.querySelector('.close-btn')
 const sections = document.querySelectorAll('section')
 const navbar = document.querySelector('nav')
 
-console.log(projectNavCompact)
-// expander //
-for (let i = 0; i < projectLinks.length; i++) {
-    projectLinks[i].addEventListener('click', function(){
-        projectBackground.classList.add('shrink')
-        projectPanel.classList.add('expand')
-        sectionTitle.classList.add('shrink')
-        
-        if (projectNavCompact.style.display === "none") {
-            projectNavCompact.style.display = "inline"
-        } else {
-            projectNavCompact.style.display = "none"
-        }
 
-        for (let j = 0; j < asides.length; j++) {
-            if (j === i) {
-                asides[j].classList.add('visible')
+// expander //
+const expander = (expandEl, shrinkEl) => {
+    const elementWithFullWidthExists = document.querySelectorAll('.full-width').length > 0;
+    const elementWithZeroWidthExists = document.querySelectorAll('.zero-width').length > 0;
+    
+    if (elementWithFullWidthExists || elementWithZeroWidthExists) {
+        let elementWithFullWidth = document.querySelector('.full-width');
+        let elementWithZeroWidth = document.querySelector('.zero-width')
+
+        elementWithFullWidth.classList.remove('full-width');
+        elementWithFullWidth.classList.add('zero-width');
+
+        elementWithZeroWidth.classList.remove('zero-width');
+        elementWithZeroWidth.classList.add('full-width')
+    } else {
+        expandEl.classList.toggle('full-width');
+        shrinkEl.classList.toggle('zero-width');
+    }
+
+    if (projectBackground.classList.contains('zero-width')) {
+        projectNav.classList.add('inline')
+    } else {
+        projectNav.style.display = "none"
+    }
+
+    for (let type = 0; type < projectTypes.length; type++) {
+        projectTypes[type].classList.add('hide')
+    }
+
+    sectionTitle.classList.add('slide')
+    
+}
+
+// click on links
+for (let link = 0; link < projectLinks.length; link++) {
+    projectLinks[link].addEventListener('click', function(){
+
+        for (let project = 0; project < asides.length; project++) {
+            if (project === link) {
+                asides[project].classList.add('visible')
             } else {
-                asides[j].classList.remove('visible')
+                asides[project].classList.remove('visible')
             }
+        } 
+
+        if (projectPanel.classList.contains('full-width')) {
+            return
+        } else {
+            expander(projectPanel, projectBackground)
         }
     })
+}
+
+// click on see more
+seeMore.addEventListener('click', function(){
+    expander(projectBackground, projectPanel)
+})
+
+// for (let link = 0; link < projectLinks.length; link++) {
+//     projectLinks[link].addEventListener('click', function(){
+//         projectBackground.classList.add('shrink')
+//         projectPanel.classList.add('expand')
+//         sectionTitle.classList.add('shrink')
+//         projectNav.classList.add('inline')
+
+//         for (let type = 0; type < projectTypes.length; type++) {
+//             projectTypes[type].classList.add('hide')
+//         }
+
+//         for (let project = 0; project < asides.length; project++) {
+//             if (project === link) {
+//                 asides[project].classList.add('visible')
+//             } else {
+//                 asides[project].classList.remove('visible')
+//             }
+//         }        
+//     })
+// }
+
+// shrinker //
+const shrinker = () => {
+    projectBackground.classList.remove('shrink')
+    projectPanel.classList.remove('expand')
+    sectionTitle.classList.remove('shrink')
+    projectNav.classList.remove('inline')
+
+    for (let j = 0; j < asides.length; j++) {
+        asides[j].classList.remove('visible')
+    }
 }
 
 // observers //
@@ -50,13 +121,7 @@ if ('IntersectionObserver' in window) {
     ){
         entries.forEach(entry => {
             if(!entry.isIntersecting) {
-                projectBackground.classList.remove('shrink')
-                projectPanel.classList.remove('expand')
-                sectionTitle.classList.remove('shrink')
-
-                for (let j = 0; j < asides.length; j++) {
-                    asides[j].classList.remove('visible')
-                }
+                shrinker()
             }
         })
     }, projectPanelShrinkOptions);
