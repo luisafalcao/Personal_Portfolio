@@ -217,15 +217,6 @@ header {
 /* 5. About */
 
 /* 6. Projects */
-#all-projects {
-    height: 0;
-    transition: height ease-in 500ms;
-}
-
-#all-projects.show {
-    height: 100%;
-}
-
 .project-panel,
 .project-background {
     width: 100%;
@@ -286,16 +277,27 @@ header {
     display: none;
 }
 
+.project-cards {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .project-img {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+.project-cards img,
+.project-img img {
+    width: 100%;
+    object-fit: cover;
+}
+
 aside {
     display: none;
-    opacity: 0;
-    transition: opacity 1s 1s;
 }
 
 aside.visible {
@@ -320,27 +322,6 @@ aside.visible {
         height: var(--height);
     }
 
-    .project-panel.expand {
-        width: 100%;
-    }
-
-    .project-panel.shrink {
-        width: 0;
-    }
-
-    .project-background.shrink {
-        width: 0%;
-        padding: 0;
-    }
-
-    .project-background.expand {
-        width: 100%;
-    }
-
-    .section-title.shrink {
-        transform: translateX(-500px);
-    }
-
     .project-nav.inline ul {
         display: block;
     }
@@ -361,7 +342,7 @@ aside.visible {
         border: 3px solid transparent;
     }
 
-    .project-panel.expand .project-type {
+    .project-panel.full-width .project-type {
         display: none;
     }
     
@@ -379,6 +360,15 @@ aside.visible {
 
     .project-nav {
         height: 100%;
+    }
+
+    .project-cards {
+        flex-direction: row;
+        overflow-x: scroll;
+    }
+
+    .project-cards img {
+        width: auto;
     }
 
     .project-img {
@@ -455,7 +445,6 @@ label {
         text-align: right;
     }
 }
-
 
 .full-width {
     width: 100%;

@@ -8,7 +8,7 @@ const projectNav = document.querySelector('.project-nav')
 const projectLinks = document.querySelectorAll('.project-nav ul .project-name')
 const projectTypes = document.querySelectorAll('.project-type')
 const seeMore = document.querySelector('.more')
-const allProjects = document.querySelector('#all-projects')
+const projectCards = document.querySelector('.project-cards')
 const asides = document.querySelectorAll('aside')
 const closeBtn = document.querySelector('.close-btn')
 const sections = document.querySelectorAll('section')
@@ -37,6 +37,7 @@ const expander = (expandEl, shrinkEl) => {
     if (projectBackground.classList.contains('zero-width')) {
         projectNav.classList.add('inline')
     } else {
+        projectCards.style.display = "flex"
         projectNav.style.display = "none"
     }
 
@@ -45,10 +46,9 @@ const expander = (expandEl, shrinkEl) => {
     }
 
     sectionTitle.classList.add('slide')
-    
 }
 
-// click on links
+// click on project links
 for (let link = 0; link < projectLinks.length; link++) {
     projectLinks[link].addEventListener('click', function(){
 
@@ -96,11 +96,15 @@ seeMore.addEventListener('click', function(){
 
 // shrinker //
 const shrinker = () => {
-    projectBackground.classList.remove('shrink')
-    projectPanel.classList.remove('expand')
-    sectionTitle.classList.remove('shrink')
+    projectBackground.classList.remove('full-width')
+    projectBackground.classList.remove('zero-width')
+    projectPanel.classList.remove('full-width')
+    projectPanel.classList.remove('zero-width')
+    sectionTitle.classList.remove('slide')
     projectNav.classList.remove('inline')
-
+    projectNav.style.display = "flex";
+    projectCards.style.display = "none"
+    
     for (let j = 0; j < asides.length; j++) {
         asides[j].classList.remove('visible')
     }
