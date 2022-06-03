@@ -5,17 +5,25 @@ const projectBackground = document.querySelector('.project-background')
 const sectionTitle = document.querySelector('.section-title')
 const projectNav = document.querySelector('.project-nav')
 const projectLinks = document.querySelectorAll('.project-nav li')
+const projectNavCompact = document.querySelectorAll('.project-nav-compact')
 const asides = document.querySelectorAll('aside')
 const closeBtn = document.querySelector('.close-btn')
 const sections = document.querySelectorAll('section')
 const navbar = document.querySelector('nav')
 
+console.log(projectNavCompact)
 // expander //
 for (let i = 0; i < projectLinks.length; i++) {
     projectLinks[i].addEventListener('click', function(){
         projectBackground.classList.add('shrink')
         projectPanel.classList.add('expand')
         sectionTitle.classList.add('shrink')
+        
+        if (projectNavCompact.style.display === "none") {
+            projectNavCompact.style.display = "inline"
+        } else {
+            projectNavCompact.style.display = "none"
+        }
 
         for (let j = 0; j < asides.length; j++) {
             if (j === i) {

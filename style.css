@@ -252,6 +252,14 @@ header {
     flex-shrink: 0;
 }
 
+.project-nav-compact {
+    display: none;
+}
+
+.project-nav-compact ul li {
+    display: inline;
+}
+
 .project-nav ul li {
     line-height: 2rem;
     cursor: pointer;
@@ -412,4 +420,10 @@ label {
 
 .active {
     color: var(--accent);
+}
+
+@media only screen and (min-width:770px) {
+    #contact h5 {
+        text-align: right;
+    }
 }
